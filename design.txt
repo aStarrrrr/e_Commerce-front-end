@@ -1,0 +1,218 @@
+E-COMMERCE WEBSITE DESIGN STYLE GUIDE
+-------------------------------------
+
+PROJECT STACK:
+- Frontend: Bootstrap 5+
+- Backend: ASP.NET Core 9 MVC
+- Styling: Google Fonts, Custom SCSS/CSS, Bootstrap Variables
+
+-------------------------------------
+1. FONTS (Google Fonts)
+
+Font #1 – Primary (Headings, Navigation, Titles)
+- Name: Poppins
+- Weight: 500–700
+- Link: https://fonts.google.com/specimen/Poppins
+
+Font #2 – Secondary (Body text, product descriptions)
+- Name: Inter
+- Weight: 400–500
+- Link: https://fonts.google.com/specimen/Inter
+
+Font #3 – Serif Accent (Logo, Promotions, Hero Titles)
+- Name: Playfair Display or Lora
+- Link: https://fonts.google.com/specimen/Playfair+Display
+        https://fonts.google.com/specimen/Lora
+
+Font #4 – Optional Monospace (Prices, Highlights)
+- Name: Roboto Mono
+- Link: https://fonts.google.com/specimen/Roboto+Mono
+
+📌 Tip:
+Use only 2–3 fonts site-wide to maintain design consistency and load performance.
+
+-------------------------------------
+2. HOW TO ADD FONTS (ASP.NET CORE + Bootstrap)
+
+Step 1: Add fonts in `<head>` (Views > Shared > _Layout.cshtml)
+Example:
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+Step 2: Set in your custom CSS or SCSS:
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.logo-text, .promo-title {
+    font-family: 'Playfair Display', serif;
+}
+
+-------------------------------------
+3. COLOR PALETTE
+
+✅ PRIMARY COLOR SET (Modern & Clean):
+- Primary: #2D2F31 – Dark Slate Gray (Buttons, Nav)
+- Secondary: #F4F5F7 – Off White (Backgrounds)
+- Accent: #3CB371 – Green (Success actions)
+- Alert: #FF4C4C – Red (Error, Remove)
+- CTA Button: #0056D2 – Strong Blue
+- Hover Blue: #007BFF
+
+📝 TEXT COLORS:
+- Dark Text: #212529
+- Muted Text: #6C757D
+
+🎨 BACKGROUNDS:
+- Light Background: #FFFFFF
+- Section Alternate: #F8F9FA
+- Footer/Dark Mode: #1C1C1E
+
+📌 Tip:
+- Maintain a **4.5:1 contrast ratio** for accessibility (WCAG AA)
+- Define all custom colors as Bootstrap SCSS variables if using SCSS
+
+-------------------------------------
+4. OPTIONAL DARK THEME EXTENSIONS
+
+Dark Theme Adjustments:
+- Background: #1E1E1E
+- Text: #E1E1E1
+- Card BG: #2A2A2A
+- Button Primary: #3399FF
+- Accent: #66FFCC
+
+📌 Implement light/dark toggle using Bootstrap 5 classes or JavaScript theme switcher.
+
+-------------------------------------
+5. BEST PRACTICES
+
+✔ Use Bootstrap Utility classes for spacing & responsiveness  
+✔ Reuse defined fonts and color variables site-wide  
+✔ Store design tokens in _variables.scss  
+✔ Test responsiveness across devices  
+✔ Keep branding (fonts/colors) consistent on every page  
+✔ Avoid inline styles – prefer utility classes or CSS
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+E-COMMERCE STYLE GUIDE + CSS
+----------------------------
+
+📁 Project: ASP.NET Core 9 + Bootstrap 5
+🎨 Design: Google Fonts, Modern Color Palette, Custom Styling
+
+----------------------------------------
+STEP 1: ADD THESE GOOGLE FONTS TO YOUR <head>
+----------------------------------------
+
+Paste this in your Views > Shared > _Layout.cshtml inside the <head> tag:
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+----------------------------------------
+STEP 2: CREATE site.css IN wwwroot/css
+----------------------------------------
+
+📌 Create a file: wwwroot/css/site.css  
+Paste the following CSS into it:
+
+/* ===== START CSS ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@500;700&family=Playfair+Display:wght@600&display=swap');
+
+:root {
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+  --font-accent: 'Playfair Display', serif;
+
+  --color-primary: #2D2F31;
+  --color-secondary: #F4F5F7;
+  --color-accent: #3CB371;
+  --color-danger: #FF4C4C;
+  --color-warning: #FFA500;
+  --color-cta: #0056D2;
+  --color-cta-hover: #007BFF;
+
+  --text-primary: #212529;
+  --text-muted: #6C757D;
+
+  --bg-light: #FFFFFF;
+  --bg-alt: #F8F9FA;
+  --bg-dark: #1C1C1E;
+}
+
+body {
+  font-family: var(--font-secondary);
+  color: var(--text-primary);
+  background-color: var(--bg-light);
+}
+
+h1, h2, h3, .navbar-brand, .section-title {
+  font-family: var(--font-primary);
+  font-weight: 600;
+}
+
+.logo-text, .hero-title, .promo-heading {
+  font-family: var(--font-accent);
+}
+
+.btn-primary {
+  background-color: var(--color-cta);
+  border-color: var(--color-cta);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-cta-hover);
+  border-color: var(--color-cta-hover);
+}
+
+.btn-success {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.section-alt {
+  background-color: var(--bg-alt);
+}
+
+.footer {
+  background-color: var(--bg-dark);
+  color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
+/* ===== END CSS ===== */
+
+----------------------------------------
+STEP 3: LINK CSS FILE IN _Layout.cshtml
+----------------------------------------
+
+Add this just before </head> in your _Layout.cshtml:
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+----------------------------------------
+💡 TIPS
+----------------------------------------
+
+- Use Bootstrap utility classes together with your custom ones.
+- Define any additional colors or overrides in this file.
+- Prefer `class="section-alt"` for light gray sections between white.
+- Test color contrast with [https://webaim.org/resources/contrastchecker/](https://webaim.org/resources/contrastchecker/)

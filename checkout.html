@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header (Navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">BookBazaar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Checkout Form -->
+    <div class="container mt-3">
+        <h3>Checkout</h3>
+        <form action="#" method="POST">
+            <div class="py-2">
+                <label for="name">Name*</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+
+            <div class="py-2">
+                <label for="email">Email*</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+
+            <div class="py-2">
+                <label for="mobileNumber">Mobile Number*</label>
+                <input type="tel" class="form-control" id="mobileNumber" required>
+            </div>
+
+            <div class="py-2">
+                <label for="address">Address*</label>
+                <textarea class="form-control" id="address" rows="5" required></textarea>
+            </div>
+
+            <div class="py-2">
+                <label for="paymentMethod">Select Payment Method*</label>
+                <select id="paymentMethod" class="form-control" required>
+                    <option value="">Select Payment Method</option>
+                    <option value="COD">Cash on Delivery</option>
+                    <option value="Card">Credit/Debit Card</option>
+                    <option value="UPI">UPI</option>
+                </select>
+            </div>
+
+            <div class="py-2">
+                <button type="submit" class="btn btn-info">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

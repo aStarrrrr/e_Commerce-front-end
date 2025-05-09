@@ -1,0 +1,2689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BookMart</title>
+    <link rel="icon" href="/E-Commerce/images/icon.jpg" type="image/icon type">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+    <style>
+        .book-card img {
+            height: 180px;
+            object-fit: cover;
+        }
+
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: none; /* For Firefox */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+    body::-webkit-scrollbar{
+      display: none;
+      scrollbar-width: none;
+      scrollbar-color: transparent transparent;
+    }
+
+        body {
+            background-color: #e6f0f8;
+            overflow: auto;
+            scrollbar-width: none;
+        }
+
+        .welcome{
+            font-family: "Libre Baskerville", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .book-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-card .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .book-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .containero {
+  width: 100%;
+  height: 100%;
+  --color: #E1E1E1;
+  background-color: #F3F3F3;
+  background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+      linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+  background-size: 55px 55px;
+}
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <img src="spell-book (1).png" style="width: 35px; margin-right: 10px;" alt="">
+        <a class="navbar-brand" href="#" style="font-size: 30px;"><b>BookMart</b></a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home.html">Home</a>
+                </li>
+                <li>
+                    <a class="nav-link active" href="/getusercart.html">Cart</a>
+                </li>
+                <li>
+                    <a class="nav-link active" href="/userord.html">Orders</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <a href="/userProfile.html" class="btn btn-outline-light"><i class="fa-solid fa-user"></i> Profile</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<header class="containero bg-light py-4 text-center">
+    <div>
+        <h1 class="welcome display-5">Welcome to BookMart</h1>
+        <div class="typewriter">
+            <p class="lead">Discover your next favorite book today!</p>
+        </div>
+    </div>
+</header>
+
+<div class="container mt-4">
+    <form class="row g-3">
+        <div class="col-md-4">
+            <select class="form-select" name="genreId">
+                <option selected>Choose Genre</option>
+                <option value="1">Fiction</option>
+                <option value="2">Science</option>
+                <option value="3">Biography</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="sterm" placeholder="Search by title">
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary me-2">Search</button>
+            <a href="#" class="btn btn-dark">Reset</a>
+        </div>
+    </form>
+</div>
+
+<div class="container-fluid mt-5 rounded">
+    <div class="row g-4 px-4">
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/great gatsby.avif" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">The Great Gatsby</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> F. Scott Fitzgerald<br>
+                        <strong>Price:</strong> ₹250
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/mathilukal.jpg" class="card-img-top" alt="Book 1">
+                <div class="card-body">
+                    <h5 class="card-title">Mathilukal</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹550
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the theory.jpg" class="card-img-top" alt="Book 2">
+                <div class="card-body">
+                    <h5 class="card-title">The Theory of Everything</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Science<br>
+                        <strong>Author:</strong> Stephen Hawking<br>
+                        <strong>Price:</strong> ₹350
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/steve.webp" class="card-img-top" alt="Book 3">
+                <div class="card-body">
+                    <h5 class="card-title">Steve Jobs</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Walter Isaacson<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/1984.jpg" class="card-img-top" alt="Book 4">
+                <div class="card-body">
+                    <h5 class="card-title">1984</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> George Orwell<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/Aadujeevitham.jpg" class="card-img-top" alt="Book 5">
+                <div class="card-body">
+                    <h5 class="card-title">Aadujeevitham</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Novel<br>
+                        <strong>Author:</strong> Vaikom Muhammed Basheer<br>
+                        <strong>Price:</strong> ₹750
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/becoming.jpg" class="card-img-top" alt="Book 6">
+                <div class="card-body">
+                    <h5 class="card-title">Becoming</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Michelle Obama<br>
+                        <strong>Price:</strong> ₹450
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/to kill.jpg" class="card-img-top" alt="Book 7">
+                <div class="card-body">
+                    <h5 class="card-title">To Kill a Mockingbird</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Harper Lee<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/The-Catcher-in-the.webp" class="card-img-top" alt="Book 8">
+                <div class="card-body">
+                    <h5 class="card-title">The Catcher in the Rye</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> J.D. Salinger<br>
+                        <strong>Price:</strong> ₹299
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the diary.jpg" class="card-img-top" alt="Book 9">
+                <div class="card-body">
+                    <h5 class="card-title">The Diary of a Young Girl</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Biography<br>
+                        <strong>Author:</strong> Anne Frank<br>
+                        <strong>Price:</strong> ₹320
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the alchemist.jpg" class="card-img-top" alt="Book 10">
+                <div class="card-body">
+                    <h5 class="card-title">The Alchemist</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Fiction<br>
+                        <strong>Author:</strong> Paulo Coelho<br>
+                        <strong>Price:</strong> ₹290
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="card book-card">
+                <img src="/images/the power.jpg" class="card-img-top" alt="Book 11">
+                <div class="card-body">
+                    <h5 class="card-title">The Power of Habit</h5>
+                    <p class="card-text">
+                        <strong>Genre:</strong> Self-Help<br>
+                        <strong>Author:</strong> Charles Duhigg<br>
+                        <strong>Price:</strong> ₹400
+                    </p>
+                    <button class="btn btn-primary w-100 add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p class="mb-1">&copy; 2025 BookMart. All Rights Reserved.</p>
+        <p class="mb-0">Contact: info@bookmart.com | Phone: +91 0000000000</p>
+    </div>
+</footer>
+
+<script>
+    $(".add-to-cart").click(function() {
+        alert(" Book added to cart ");
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

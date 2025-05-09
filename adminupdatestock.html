@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Stock</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-top: 55px;
+    }
+
+    .navbar {
+      background-color: #343a40;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .backbtn {
+      width: 100px;
+    }
+
+    .navbar-brand,
+    .nav-link {
+      color: #fff !important;
+    }
+
+    .container {
+      margin-top: 80px; /* Space for fixed navbar */
+    }
+
+    .form-container {
+      width: 50%;
+    }
+
+    .text-danger {
+      margin-top: 5px;
+    }
+
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: none; /* For Firefox */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+    /* From Uiverse.io by csemszepp */ 
+    .container1 {
+      width: 100%;
+      height: 100%;
+      --s: 82px;
+      --c1: #b2b2b2;
+      --c2: #ffffff;
+      --c3: #d9d9d9;
+
+      --_g: var(--c3) 0 120deg, #0000 0;
+      background: conic-gradient(from -60deg at 50% calc(100% / 3), var(--_g)),
+        conic-gradient(from 120deg at 50% calc(200% / 3), var(--_g)),
+        conic-gradient(
+          from 60deg at calc(200% / 3),
+          var(--c3) 60deg,
+          var(--c2) 0 120deg,
+          #0000 0
+        ),
+        conic-gradient(from 180deg at calc(100% / 3), var(--c1) 60deg, var(--_g)),
+        linear-gradient(
+          90deg,
+          var(--c1) calc(100% / 6),
+          var(--c2) 0 50%,
+          var(--c1) 0 calc(500% / 6),
+          var(--c2) 0
+        );
+      background-size: calc(1.732 * var(--s)) var(--s);
+    }
+  </style>
+</head>
+<body class="container1">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">BookMart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <!-- Logout Button -->
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="/login.html" class="btn btn-outline-light">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container mt-5 bg-white p-4 rounded shadow">
+    <h2>Manage Stock</h2>
+
+    <form action="/stock/managestock" method="POST" class="form-container pt-2">
+      <!-- Hidden BookId Field -->
+      <input type="hidden" name="BookId" value="<!-- Dynamic BookId -->">
+
+      <div class="mb-2">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="Quantity" class="form-control mt-2">
+        <span class="text-danger"><!-- Validation Message for Quantity --></span>
+      </div>
+
+      <button type="submit" class="backbtn btn btn-primary mt-2">Update</button>
+      <a class="backbtn mt-2 btn btn-primary" href="adminstock.html">Back</a>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

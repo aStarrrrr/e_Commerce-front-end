@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 55px;
+            overflow: auto;
+            scrollbar-width: none;
+        }
+
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: none; /* For Firefox */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+    body::-webkit-scrollbar{
+      display: none;
+      scrollbar-width: none;
+      scrollbar-color: transparent transparent;
+    }
+
+        body {
+            background-color: #e6f0f8;
+            overflow: auto;
+            scrollbar-width: none;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #343a40;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #fff !important;
+        }
+
+        .carticon {
+            height: 25px;
+            width: 25px;
+            margin-bottom: 8px;
+            margin-right: 8px;
+        }
+
+        .table {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 12px;
+        }
+
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 12px;
+            background-color: #f5f5f5; /* Same consistent light grey color for all rows */
+        }
+
+        .table img {
+            border-radius: 4px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .table img:hover {
+            transform: scale(1.1);
+        }
+
+        .table tbody tr:hover {
+            background-color: #e0e0e0; /* Slightly darker grey on hover */
+            transition: background-color 0.3s;
+        }
+
+        .btn-dark {
+            border-radius: 4px;
+            font-size: 14px;
+            padding: 5px 12px;
+            margin: 2px;
+        }
+
+        .btn-dark:hover {
+            background-color: #495057;
+        }
+
+        .my-2 h5 {
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <img src="spell-book (1).png" style="width: 35px; margin-right: 10px;" alt="">
+            <a class="navbar-brand" href="#" style="font-size: 30px;"><b>BookMart</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/home.html">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-link active" href="/getusercart.html">Cart</a>
+                    </li>
+                    <li>
+                        <a class="nav-link active" href="/userord.html">Orders</a>
+                    </li>                  
+                </ul>
+                <div class="d-flex">
+                    <a href="/userProfile.html" class="btn btn-outline-light"><i class="fa-solid fa-user"></i> Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+ 
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h4 class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="carticon bi bi-cart-check-fill" viewBox="0 0 16 16">
+            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708"/>
+          </svg> My Cart</h4>
+ 
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Image</th>
+                    <th>Genre</th>
+                    <th>Unit Price (INR)</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>To Kill a Mockingbird</td>
+                    <td><img src="images/to kill.jpg" alt="To Kill a Mockingbird" style="width:80px;height:100px"></td>
+                    <td>Fiction</td>
+                    <td>₹ 299</td>
+                    <td>2</td>
+                    <td>
+                        <a class="btn btn-dark" href="#">+</a>
+                        <a class="btn btn-dark" href="#">-</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>The Power of Habit</td>
+                    <td><img src="images/the power.jpg" alt="The Power of Habit" style="width:80px;height:100px"></td>
+                    <td>Self-Book</td>
+                    <td>₹ 400</td>
+                    <td>1</td>
+                    <td>
+                        <a class="btn btn-dark" href="#">+</a>
+                        <a class="btn btn-dark" href="#">-</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+ 
+        <div class="my-2">
+            <h5>Total (INR): ₹ 998</h5>
+        </div>
+ 
+        <div class="my-2">
+            <a class="btn btn-dark" href="/paymentselection.html">Checkout</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2025 BookMart. All Rights Reserved.</p>
+            <p>Contact: info@bookmart.com | Phone: +91 0000000000</p>
+        </div>
+    </footer>
+</body>
+</html>

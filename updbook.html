@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - Update Genre</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+ 
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-top: 55px;
+    }
+ 
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #343a40;
+    }
+ 
+    .navbar-brand,
+    .nav-link {
+      color: #fff !important;
+    }
+ 
+    .sidebar {
+      height: 100vh;
+      background-color: #212529;
+      padding-top: 20px;
+    }
+ 
+    .sidebar a {
+      color: #adb5bd;
+      padding: 10px 20px;
+      display: block;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+ 
+    .sidebar a:hover {
+     -color: #343a40;
+      color: #fff;
+    }
+ 
+    .content {
+      padding: 23px;
+    }
+ 
+    .card {
+      margin-bottom: 30px;
+    }
+ 
+    .card-header {
+      background-color: #343a40;
+      color: #fff;
+    }
+ 
+    .card-body {
+      font-size: 1.1rem;
+    }
+ 
+    .table th {
+      background-color: #f1f3f5;
+      white-space: nowrap; /* Prevent text wrapping */
+      max-width: 200px; /* Limit max width */
+      overflow: hidden; /* Hide overflowing content */
+      text-overflow: ellipsis; /* Show ellipsis for overflowing content */
+    }
+ 
+    .table {
+      table-layout: auto; /* Allow columns to adjust based on content */
+      width: 100%; /* Ensure table spans full width */
+    }
+ 
+    @media (max-width: 991.98px) {
+      .sidebar {
+        display: none;
+      }
+ 
+      .content {
+        margin-left: 0;
+      }
+    }
+    
+.backbtn{
+    width: 100px;
+}
+
+/* From Uiverse.io by csemszepp */
+.container1 {
+  width: 100%;
+  height: 100%;
+  --s: 82px;
+  --c1: #b2b2b2;
+  --c2: #ffffff;
+  --c3: #d9d9d9;
+ 
+  --_g: var(--c3) 0 120deg, #0000 0;
+  background: conic-gradient(from -60deg at 50% calc(100% / 3), var(--_g)),
+    conic-gradient(from 120deg at 50% calc(200% / 3), var(--_g)),
+    conic-gradient(
+      from 60deg at calc(200% / 3),
+      var(--c3) 60deg,
+      var(--c2) 0 120deg,
+      #0000 0
+    ),
+    conic-gradient(from 180deg at calc(100% / 3), var(--c1) 60deg, var(--_g)),
+    linear-gradient(
+      90deg,
+      var(--c1) calc(100% / 6),
+      var(--c2) 0 50%,
+      var(--c1) 0 calc(500% / 6),
+      var(--c2) 0
+    );
+  background-size: calc(1.732 * var(--s)) var(--s);
+}
+ 
+ 
+  </style>
+ 
+ 
+</head>
+<body class="container1">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">BookMart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+ 
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <!-- Sidebar links for small screens -->
+        <ul class="navbar-nav d-lg-none">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Orders</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Stock</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Genre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Books</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Top Selling Items</a></li>
+        </ul>
+ 
+        <!-- Logout Button -->
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="/login.html" class="btn btn-outline-light">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+  <!-- Sidebar and Content -->
+  <div class="bg-light rounded m-5">
+    <!-- Main Content -->
+    <div class="content">
+      <div >
+        <h2 class="mb-4">Update Book</h2>
+        <form action="/book/updatebook" method="post">
+          <input type="hidden" name="Id" value="<!-- Add Book Id here -->" />
+          <div class="mb-3">
+            <label for="bookName" class="form-label"> Book</label>
+            <input type="text" id="bookName" name="BookName" class="form-control" placeholder="Add Book here" />
+            <span class="text-danger"> <!-- Validation message here --> </span>
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="backbtn btn btn-primary mt-2">Update</button>
+            <a class="backbtn mt-2 btn btn-primary" href="/book.html">Back</a>
+          </div>
+        </form>
+    </div>
+  </div>
+ 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
